@@ -10,7 +10,7 @@ const TodoList = ({ todos, addTodo, removeTodo }) => (
     <ul>
       { todos.map(todo => 
         <li key={todo.id}>
-          {todo.text} 
+          {todo.text} &nbsp;
           <button onClick={() => removeTodo(todo.id)}>X</button>
         </li>
       ) }
