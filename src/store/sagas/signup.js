@@ -5,7 +5,7 @@ import { login } from "../../services/auth";
 
 import { Creators as SignUpActions } from '../ducks/signup';
 
-export function* signUp(action) {
+export function* signUpSaga(action) {
   try {
     const { user: { name, email, password } } = action.payload;
     const { history } = action.payload;

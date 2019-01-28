@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { Link } from "react-router-dom";
 
 import { connect } from 'react-redux';
@@ -8,6 +10,20 @@ import { Creators as SignUpActions } from '../../store/ducks/signup';
 import { Form, Container } from "./styles";
 
 class SignUp extends Component {
+  static propTypes = {
+    signUpRequest: PropTypes.func.isRequired,
+    signUpFailure: PropTypes.func.isRequired,
+    signup: PropTypes.shape({
+      loading: PropTypes.bool,
+      data: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+        password: PropTypes.string,
+      })),
+      error: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    }).isRequired,
+  }
+
   state = {
     name: '',
     email: '',
@@ -37,21 +53,18 @@ class SignUp extends Component {
           <input
             type="text"
             placeholder="Nome"
-            value={this.state.name}
             onChange={e => this.setState({ name: e.target.value })}
           />
 
           <input
             type="email"
             placeholder="Endereço de e-mail"
-            value={this.state.email}
             onChange={e => this.setState({ email: e.target.value })}
           />
 
           <input
             type="current-password"
             placeholder="Senha"
-            value={this.state.password}
             onChange={e => this.setState({ password: e.target.value })}
           />
 
