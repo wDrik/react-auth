@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { isAdmin } from '../../services/auth';
+
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as FavoriteActions } from '../../store/ducks/favorites';
@@ -33,6 +35,8 @@ class Main extends Component {
   }
 
   render() {
+    console.log(isAdmin());
+
     return(
       <Fragment>
         <form onSubmit={this.handleAddRepository}>
@@ -72,7 +76,8 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  favorites: state.favorites
+  favorites: state.favorites,
+  login: state.login
 });
 
 const mapDispatchToProps = dispatch =>

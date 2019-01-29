@@ -30,7 +30,7 @@ class SignUp extends Component {
     password: ''
   };
 
-  handleSignUp = async e => {
+  handleSignUp = e => {
     e.preventDefault();
 
     const { name, email, password } = this.state;
@@ -41,7 +41,7 @@ class SignUp extends Component {
 
     const { history } = this.props;
 
-    await this.props.signUpRequest({ name, email, password }, history);
+    this.props.signUpRequest({ name, email, password }, history);
   }
 
   render() {
