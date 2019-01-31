@@ -11,7 +11,7 @@ export function* loginSaga(action) {
     const { history } = action.payload;
 
     const { data } = yield call(api.post, `/auth/authenticate`, { email, password });
-    
+
     yield login(data.token);
 
     yield put(LoginActions.loginSuccess(data));

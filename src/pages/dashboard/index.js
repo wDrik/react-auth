@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { isAdmin } from '../../services/auth';
+// import axios from 'axios';
+
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,9 +23,7 @@ class Main extends Component {
     }).isRequired,
   }
 
-  state = {
-    repositoryInput: '',
-  }
+  state = { repositoryInput: '' }
 
   handleAddRepository = e => {
     e.preventDefault();
@@ -34,9 +33,19 @@ class Main extends Component {
     this.setState({ repositoryInput: '' });
   }
 
-  render() {
-    console.log(isAdmin());
+  // componentWillMount = async () => {
+  //   const response = await axios.get('https://runrun.it/api/v1.0/tasks', {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       "App-Key": "e53792fdcdd0ca07990351031f3fabd5",
+  //       "User-Token": "pmOBhhq2LNwxQGbiG287",
+  //     }
+  //   });
 
+  //   console.log(response);
+  // }
+
+  render() {
     return(
       <Fragment>
         <form onSubmit={this.handleAddRepository}>

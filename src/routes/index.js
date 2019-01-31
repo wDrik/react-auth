@@ -1,9 +1,17 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
+// import Footer from '../components/Footer';
+// import Sidebar from '../components/Sidebar';
+
+import { Layout } from '../styles/components';
+import { Content } from '../styles/components';
+
 import { isAuthenticated, isAdmin } from '../services/auth';
 
-import Main from '../pages/main';
+
+import Dashboard from '../pages/dashboard';
+import DashboardAdmin from '../pages/dashboard-admin';
 import Login from '../pages/login';
 import SignUp from '../pages/signup';
 
@@ -11,7 +19,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     { ...rest }
     render={ props =>
-      isAuthenticated() ? (
+      (isAuthenticated() && !isAdmin())? (
         <Component { ...props } />
       ) : (
         <Redirect to={{ pathname: '/', state: { from: props.location } }} />
@@ -24,7 +32,7 @@ const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     { ...rest }
     render={ props =>
-      isAdmin() ? (
+      (isAuthenticated() && isAdmin()) ? (
         <Component { ...props } />
       ) : (
         <Redirect to={{ pathname: '/', state: { from: props.location } }} />
@@ -36,15 +44,19 @@ const AdminRoute = ({ component: Component, ...rest }) => (
 const Routes = () => (
   <BrowserRouter>
     <Fragment>
-      <Switch>
-        <PrivateRoute path="/dashboard" component={ Main } />
+      <Layout>
+        <Content>
+          <Switch>
+            <PrivateRoute path="/dashboard" component={ Dashboard } />
 
-        <AdminRoute path="/dashboard-admin" component={ Main } />
+            <AdminRoute path="/dashboard-admin" component={ DashboardAdmin } />
 
-        <Route exact path='/' component={ Login } />
-        <Route path='/signup' component={ SignUp } />
-        <Route path='*' component={ () => <h1>Page not found</h1> } />
-      </Switch>
+            <Route exact path='/' component={ Login } />
+            <Route path='/signup' component={ SignUp } />
+            <Route path='*' component={ () => <h1>Page not found</h1> } />
+          </Switch>
+        </Content>
+      </Layout>
     </Fragment>
   </BrowserRouter>
 );

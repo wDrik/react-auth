@@ -3,8 +3,6 @@ import { Provider } from 'react-redux';
 
 import GlobalStyles from './styles/global';
 
-import Footer from './components/Footer';
-
 import './config/reactotron';
 import store from './store';
 
@@ -15,8 +13,6 @@ const App = () => (
     <Fragment>
       <GlobalStyles />
       <Routes />
-
-      <Footer />
     </Fragment>
   </Provider>
 );
